@@ -1255,6 +1255,7 @@ class TensorNetwork2D(TensorNetworkGen):
         cutoff=1e-10,
         method="dm",
         layer_tags=None,
+        s_info_layers=None,
         **compress_opts,
     ):
         from quimb.tensor.tensor_1d_compress import tensor_network_1d_compress
@@ -1275,6 +1276,7 @@ class TensorNetwork2D(TensorNetworkGen):
                 method=method,
                 site_tags=site_tag_tmps,
                 inplace=True,
+                s_info_layers=s_info_layers,
                 **compress_opts,
             )
 

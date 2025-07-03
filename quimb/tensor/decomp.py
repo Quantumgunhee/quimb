@@ -1233,7 +1233,7 @@ def squared_op_to_reduced_factor_numba(x2, dl, dr, right=True):
 
 
 def compute_oblique_projectors(
-    Rl, Rr, max_bond, cutoff, absorb="both", cutoff_mode=4, **compress_opts
+    Rl, Rr, max_bond, cutoff, absorb="both", cutoff_mode=4, s_info=None, **compress_opts
 ):
     """Compute the oblique projectors for two reduced factor matrices that
     describe a gauge on a bond. Concretely, assuming that ``Rl`` and ``Rr`` are
@@ -1278,6 +1278,8 @@ def compute_oblique_projectors(
         cutoff_mode=cutoff_mode,
         **compress_opts,
     )
+    if s_info is not None:
+        s_info.append(st)
 
     if absorb is None:
         Pl = Rr @ rddiv(dag(VHt), st)

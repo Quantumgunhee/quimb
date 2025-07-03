@@ -25,6 +25,7 @@ def tensor_network_ag_compress_projector(
     optimize="auto-hq",
     equalize_norms=False,
     inplace=False,
+    s_info_layers=None,
     **compress_opts,
 ):
     """Compress an arbtrary geometry tensor network, with potentially multiple
@@ -104,7 +105,7 @@ def tensor_network_ag_compress_projector(
         gauges = None
 
     # then compute projectors using local information
-
+    s_info = []
     for taga, tagb in edges:
         tn_calc.insert_compressor_between_regions_(
             [taga],
@@ -116,8 +117,11 @@ def tensor_network_ag_compress_projector(
             new_rtags=[tagb],
             gauges=gauges,
             optimize=optimize,
+            s_info=s_info,
             **compress_opts,
         )
+    if s_info_layers is not None:
+        s_info_layers.append(s_info)
 
     if not lazy:
         # then contract each site with all surrounding projectors

@@ -9696,6 +9696,7 @@ class TensorNetwork(object):
         gauge_power=1.0,
         optimize="auto-hq",
         inplace=False,
+        s_info=None,
         **compress_opts,
     ):
         """Compute and insert a pair of 'oblique' projection tensors (see for
@@ -9773,6 +9774,7 @@ class TensorNetwork(object):
             Rr,
             max_bond=max_bond,
             cutoff=cutoff,
+            s_info=s_info,
             **compress_opts,
         )
 
